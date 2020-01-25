@@ -1,30 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: null };
-  }
+const App = () => {
+  const [username, setUsername] = useState(null);
 
-  componentDidMount() {
+  useEffect(() => {
     fetch("api")
       .then(res => res.json())
-      .then(data => this.setState({ username: data.username }));
-  }
+      .then(data => setUsername(data.username));
+  });
 
-  render() {
-    const { username } = this.state;
-    return (
-      <div className="App">
-        {" "}
-        <header className="App-header">
-          {" "}
-          {username ? `Hello ${username}` : "Hello World"}{" "}
-        </header>{" "}
-      </div>
-    );
-  }
-}
+  return <>{username ? `Hello ${username}` : "Hello World"}</>;
+};
+
 export default App;
