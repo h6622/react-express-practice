@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Main from "./pages/main";
+import Test from "./pages/test";
+import Test2 from "./pages/test2";
 
 const App = () => {
-  const [username, setUsername] = useState(null);
-
-  useEffect(() => {
-    fetch("api")
-      .then(res => res.json())
-      .then(data => setUsername(data.username));
-  });
-
-  return <>{username ? `Hello ${username}` : "Hello World"}</>;
+  return (
+    <Router>
+      <Route exact path="/" component={Main} />
+      <Route path="/test" component={Test} />
+      <Route path="/test2" component={Test2} />
+    </Router>
+  );
 };
 
 export default App;
